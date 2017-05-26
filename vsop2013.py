@@ -118,6 +118,11 @@ class VSOP2013File:
     # improving performance.
 
     def txtfile_path(self, i):
+        """
+        Build a source text file path.
+        :param i: index of the source text file in the TXT_FILES array
+        :return: the source text file path (None if error)
+        """
         if (i >= 0) and (i < self.N_PLANETS):
             return os.path.join(TXT_FILES_ROOT, TXT_FILES[i])
         return None
@@ -125,18 +130,18 @@ class VSOP2013File:
     def txtfile_exists(self, i):
         """
         Test if a source text file exists.
-        :param i: index of the source text file in the TEXT_FILES array
+        :param i: index of the source text file in the TXT_FILES array
         :return: true=exists and is a file
         """
         tfp = self.txtfile_path(i)
         if tfp is not None:
             return os.path.isfile(tfp)
-        return None
+        return False
 
     def bin_txtfile(self, i):
         """
         Convert a source text file to a binary file.
-        :param i: index of the source text file in the TEXT_FILES array
+        :param i: index of the source text file in the TXT_FILES array
         """
         self.bfref = None
         self.bfi = None
@@ -273,31 +278,48 @@ class VSOP2013File:
     # bin file support methods
 
     def binfile_path(self, i):
+        """
+        Build a binary file path.
+        :param i: index of the file name in the BIN_FILES array
+        :return: the bin file path (None if error)
+        """
         if (i >= 0) and (i < self.N_PLANETS):
             return os.path.join(BIN_FILES_ROOT, BIN_FILES[i])
         return None
 
     def binfile_exists(self, i):
+        """
+        Test if a binary file exists.
+        :param i: index of the binary file name in the BIN_FILES array
+        :return: true if the file exists
+        """
         bfp = self.binfile_path(i)
         if bfp is not None:
             return os.path.isfile(bfp)
-        return None
+        return False
 
     def close_binfile(self):
+        """
+        Close the current binary file if necessary.
+        """
         if self.bfref is not None:
             self.bfref.close()
             self.bfref = None
             self.bfi = None
 
     def open_binfile(self, i):
+        """
+        Open the specified binary file.
+        :param i: index of the binary file in the BIN_FILES array
+        """
         self.close_binfile()
         bfp = self.binfile_path(i)
         self.bfref = open(bfp, 'rb')
         self.bfi = i
-        self.read_binfile_header()
+        self.__read_binfile_header()
         self.doff = self.bfref.tell()
 
-    def read_binfile_header(self):
+    def __read_binfile_header(self):
         self.idf = struct.unpack('8s', self.bfref.read(8))[0]
         if self.idf != "vsop2013":
             raise ValueError("Invalid file id! {}".format(self.idf))
@@ -313,6 +335,12 @@ class VSOP2013File:
         self.loc[2] = struct.unpack('9i', self.bfref.read(9 * 4))
 
     def calculate_for(self, ip, jde):
+        """
+        Attempt to calculate the position and velocity for the specified planet.
+        :param ip: index of planet to perform calculation for
+        :param jde: the julian date to perform the calculation for
+        :return: an array of the X, Y, and Z heliocentric position of the planet and the X', Y', and Z' heliocentric velocity
+        """
         if (ip < 0) or (ip >= self.N_PLANETS):
             raise ValueError("Invalid planet index! Is outside range of [{}:{}]".format(0, self.N_PLANETS))
         i = None
@@ -364,12 +392,12 @@ if __name__ == "__main__":
 
     vsop2013 = VSOP2013File()
 
-    # generate bin files if necessary
+    # generate bin files from source text files if necessary
     for i in range(0, len(TXT_FILES)):
         if vsop2013.txtfile_exists(i) and not vsop2013.binfile_exists(i):
             vsop2013.bin_txtfile(i)
 
-    # calculate positions and velocities
+    # calculate positions and velocities as a control set for algorithm verification
     ndat = 5
     YEAR = (-4500, -3000, -1500, 0, 1500, 3000)
     TZERO = (77432.5, 625307.5, 1173182.5, 1721057.5, 2268932.5, 2816818.5)
