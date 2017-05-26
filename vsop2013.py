@@ -1,5 +1,5 @@
 """
-This package provides basic support for the VSOP2013 ephemerides which can be used to compute the
+This module provides basic support for the VSOP2013 ephemerides which can be used to compute the
 heliocentric positions and velocities of the 8 planets Mercury, Venus, the Earth-Moon barycenter,
 Mars, Jupiter, Saturn, Uranus, Neptune and the dwarf planet Pluto (only in the period from +1500
 to +3000).
@@ -38,16 +38,20 @@ and given as control values for the users.
 
 The file README.pdf also provides this information as well as other info that may be of interest.
 
-This package has been modified to provide a degree of convenience for the Python user, not just
+This module has been developed to provide a degree of convenience for the Python user, not just
 a reference implementation.
 
 TXT_FILES_ROOT is the path to the directory containing the VSOP2013 source text files. You may
-change this to reflect where your source text files are actually located.
+change this to reflect where your source text files are actually located. The default is to place
+the source text files into a subdirectory called "ephemerides" at the location of the vsop2013.py
+script. If the vsop2013.py functionality is being used by other python scripts then this variable
+can be changed once the module is loaded.
 
 TXT_FILES is an array of the filenames of the VSOP2013 source text files.
 
 BIN_FILES_ROOT is the path to the directory containing the VSOP2013 binary files. You may
-change this to reflect where your binary files are actually located.
+change this to reflect where your binary files are actually located. This variable is similar to
+the TXT_FILES_ROOT variable discussed previously.
 
 BIN_FILES is an array of the filenames of the VSOP2013 binary files.
 
