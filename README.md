@@ -38,7 +38,7 @@ VSOP2013_binfile.f : This program converts the sequential files into direct acce
 VSOP2013_compute.f : This program computes planetary coordinates from a direct access file.
 
 The file VSOP2013_ctl.txt contains planetary coordinates computed by the program VSOP2013_compute.f
-and given as control values for the users.
+and is provided as a means of validating the calculations using these ephemerides.
 
 The file README.pdf also provides this information as well as other info that may be of interest.
 
