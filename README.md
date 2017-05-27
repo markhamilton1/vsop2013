@@ -13,12 +13,12 @@ The ephemerides are provided in 6 sequential text files (ASCII) and can be downl
     
 The following provides the name of each file and the period that it covers:
 
-* VSOP2013.m4000: -4500 to -3000
-* VSOP2013.m2000: -3000 to -1500
-* VSOP2013.m1000: -1500 to 0
-* VSOP2013.p1000: 0 to +1500
-* VSOP2013.p2000: +1500 to +3000
-* VSOP2013.p4000: +3000 to +4500
+* `VSOP2013.m4000: -4500 to -3000`
+* `VSOP2013.m2000: -3000 to -1500`
+* `VSOP2013.m1000: -1500 to 0`
+* `VSOP2013.p1000: 0 to +1500`
+* `VSOP2013.p2000: +1500 to +3000`
+* `VSOP2013.p4000: +3000 to +4500`
 
 While these text files could be used directly, this would have a serious impact on the performance
 of computing any significant number of planetary positions. Instead it is suggested that these
