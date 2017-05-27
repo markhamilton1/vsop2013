@@ -59,5 +59,5 @@ the TXT_FILES_ROOT variable discussed previously.
 
 BIN_FILES is an array of the filenames of the VSOP2013 binary files.
 
-PLANET NAMES is an array of the names of the supported planets and is used ONLY for the display
+PLANET_NAMES is an array of the names of the supported planets and is used ONLY for the display
 of the results by the print_results function.
