@@ -10,7 +10,10 @@ to +3000).
 The ephemerides are provided in 6 sequential text files (ASCII) and can be downloaded at:
 
     ftp://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides
-    
+
+**NOTE that you will likely have to use an ftp client to download the ephemerides files.
+For MacOSX I use the app ForkLift and have verified that the files are still available as of July 20, 2022.**
+
 The following provides the name of each file and the period that it covers:
 
 * `VSOP2013.m4000: -4500 to -3000`
@@ -61,3 +64,6 @@ BIN_FILES is an array of the filenames of the VSOP2013 binary files.
 
 PLANET_NAMES is an array of the names of the supported planets and is used ONLY for the display
 of the results by the print_results function.
+
+At the end of the source file is code that shows how to load the files, convert them to binary,
+and then to perform basic calculations.
