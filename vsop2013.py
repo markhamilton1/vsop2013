@@ -7,6 +7,10 @@ to +3000).
 The ephemerides are provided in 6 sequential text files (ASCII) and can be downloaded at:
 
     ftp://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides
+    
+    NOTE: You will likely have to use an ftp client to download the ephemerides files.
+          For MacOSX I use the app ForkLift and have verified that the files are still
+          available as of July 20, 2022.
 
 The following provides the name of each file and the period that it covers:
     VSOP2013.m4000: -4500 to -3000
@@ -57,6 +61,9 @@ BIN_FILES is an array of the filenames of the VSOP2013 binary files.
 
 PLANET_NAMES is an array of the names of the supported planets and is used ONLY for the display
 of the results by the print_results function.
+
+At the end of this file is code that shows how to load the files, convert them to binary,
+and then to perform basic calculations.
 """
 from array import array
 import os
@@ -389,15 +396,15 @@ class VSOP2013File:
 
 if __name__ == "__main__":
 
-
+	# Create an instance of the VSOP2013File class.
     vsop2013 = VSOP2013File()
 
-    # generate bin files from source text files if necessary
+    # Generate bin files from source text files if necessary.
     for i in range(0, len(TXT_FILES)):
         if vsop2013.txtfile_exists(i) and not vsop2013.binfile_exists(i):
             vsop2013.bin_txtfile(i)
 
-    # calculate positions and velocities as a control set for algorithm verification
+    # Calculate positions and velocities as a control set for algorithm verification.
     ndat = 5
     YEAR = (-4500, -3000, -1500, 0, 1500, 3000)
     TZERO = (77432.5, 625307.5, 1173182.5, 1721057.5, 2268932.5, 2816818.5)
@@ -413,4 +420,3 @@ if __name__ == "__main__":
                 if r[0] != 0.0:
                     print_results(ip, jd, r)
     vsop2013.close_binfile()
-
