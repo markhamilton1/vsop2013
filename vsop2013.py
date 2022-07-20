@@ -235,7 +235,7 @@ class VSOP2013File:
             self.loc[2].append(int(p3[i]))
 
     def __write_binfile_header(self):
-        self.bfref.write(struct.pack('8s', self.idf))
+        self.bfref.write(struct.pack('8s', bytes(self.idf, 'utf-8')))
         self.bfref.write(struct.pack('fffii', self.t1, self.t2, self.delta, self.nintv, self.ncoef))
         self.bfref.write(struct.pack('9i', *self.loc[0]))
         self.bfref.write(struct.pack('9i', *self.loc[1]))
@@ -321,7 +321,7 @@ class VSOP2013File:
 
     def __read_binfile_header(self):
         self.idf = struct.unpack('8s', self.bfref.read(8))[0]
-        if self.idf != "vsop2013":
+        if self.idf != b'vsop2013':
             raise ValueError("Invalid file id! {}".format(self.idf))
         hdr = struct.unpack('fffii', self.bfref.read(5 * 4))
         self.t1 = hdr[0]
@@ -403,9 +403,9 @@ if __name__ == "__main__":
     TZERO = (77432.5, 625307.5, 1173182.5, 1721057.5, 2268932.5, 2816818.5)
     step = 136798.0
     for i, tzero in enumerate(TZERO):
-        print
+        print()
         print("*** {:>5d} to {:<5d} ***".format(YEAR[i], YEAR[i] + 1500))
-        print
+        print()
         for ip in range(0, vsop2013.N_PLANETS):
             for n in range(0, ndat):
                 jd = tzero + (n * step)
