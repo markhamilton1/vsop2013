@@ -78,7 +78,8 @@ To use this program:
 9. download file 'VSOP2013.p2000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
 10. download file 'VSOP2013.p4000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
 11. change back to directory 'vsop'
-12. run 'python ./vsop2013.py'
+12. download the python program 'vsop2013.py'
+13. run 'python ./vsop2013.py'
 
 That will decompress and prepare the ephemerides.
 Once complete the you can use as follows:
