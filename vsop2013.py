@@ -6,7 +6,7 @@ to +3000).
 
 The ephemerides are provided in 6 sequential text files (ASCII) and can be downloaded at:
 
-    ftp://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides
+    https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/
     
     NOTE: You will likely have to use an ftp client to download the ephemerides files.
           For MacOSX I use the app ForkLift and have verified that the files are still
