@@ -64,6 +64,35 @@ of the results by the print_results function.
 
 At the end of this file is code that shows how to load the files, convert them to binary,
 and then to perform basic calculations.
+
+To use this program:
+
+1. create a directory called 'vsop'
+2. change to directory 'vsop'
+3. create a directory called 'ephemerides'
+4. change to directory 'ephemerides'
+5. download file 'VSOP2013.m4000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+6. download file 'VSOP2013.m2000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+7. download file 'VSOP2013.m1000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+8. download file 'VSOP2013.p1000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+9. download file 'VSOP2013.p2000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+10. download file 'VSOP2013.p4000' from 'https://ftp.imcce.fr/pub/ephem/planets/vsop2013/ephemerides/'
+11. change back to directory 'vsop'
+12. run 'python ./vsop2013.py'
+
+That will decompress and prepare the ephemerides.
+Once complete the you can use as follows:
+
+vsop2013 = VSOP2013File()
+r = vsop2013.calculate_for(<planet index>, <julian date>)
+print_results(<planet index>, <julian date>, r)
+
+This will output somthing like the following: 
+
+Jupiter  JD2816818.5  X :  -4.6312422242673 ua    Y :   2.7235071301370 ua    Z :   0.0885945013174 ua
+                      X':  -0.0039324916289 ua/d  Y':  -0.0061510013748 ua/d  Z':   0.0001158736935 ua/d
+
+if <planet index> was 4, <julian date> was 2816818.5.
 """
 from array import array
 import os
